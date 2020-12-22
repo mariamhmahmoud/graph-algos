@@ -36,6 +36,7 @@ class Prim:
 	def print_plot(self):
 		x = []
 		y = []
+		d = 0
 		for coord in range(len(self.coords) - 1):
 			x.append(self.coords[coord][0])
 			x.append(self.coords[self.v[coord]][0])
@@ -44,5 +45,15 @@ class Prim:
 			plt.plot(x, y)
 			x.clear()
 			y.clear()
+			d += self.d[coord]
+		print()
+		print('*******************************')
+		print('MST information:')
+		print('Distance: ', d)
+		print('Total points connected: ', len(self.coords))
+		print('Points connected: ')
+		for coord in range(1, len(self.coords) - 1):
+			print(coord, '-->', self.v[coord])
+		print('*******************************')
 		plt.show()
 		
