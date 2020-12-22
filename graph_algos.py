@@ -1,5 +1,6 @@
 import argparse
-
+from prims import Prim
+import matplotlib.pyplot as plt
 
 #parse command line
 parser = argparse.ArgumentParser(description='Specify which graph algorithm to run.')
@@ -22,7 +23,9 @@ with open(args.filename, "r") as file:
 
 
 if args.prims:
-	pass
+	p = Prim(points)
+	p.algo()
+	p.print_plot()
 elif args.kruskalls:
 	pass
 elif args.arbitrary:
