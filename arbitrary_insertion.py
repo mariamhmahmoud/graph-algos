@@ -55,24 +55,25 @@ class ArbitraryInsertion:
 		x = []
 		y = []
 		for i in self.subtour:
-			print(i)
-		for i in self.subtour:
 			x.append(self.coords[i][0])
 			y.append(self.coords[i][1])
-		print(x)
-		print(y)
-		print()
-		print('*******************************')
-		print('Arbitrary Insertion information:')
-		print('*******************************')
-		distance = 0
-		print(self.coords)
 
 		#calculates total distance and prints
 		for i in range(len(self.coords) - 2):
 			distance += self.calculate_distance(self.coords[self.subtour[i]], self.coords[self.subtour[i + 1]])
 		distance += self.calculate_distance(self.coords[self.subtour[0]], self.coords[self.subtour[len(self.coords) - 2]])
-		print(distance)
+
+		print()
+		print('*******************************')
+		print('Arbitrary Insertion information:')
+		print('Distance: ', distance)
+		print('Total points connected: ', len(self.coords))
+		print('Points connected: ')
+		for i in subtour:
+			print(i, '--> '),
+		print('*******************************')
+		distance = 0
+		print(self.coords)
 
 		plt.plot(x, y)
 		plt.show()
