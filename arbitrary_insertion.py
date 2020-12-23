@@ -10,6 +10,7 @@ class ArbitraryInsertion:
 	def algo(self):
 		self.in_subtour[0] = True
 		self.subtour.append(0)
+		print(self.subtour)
 		min_distance = float('inf')
 		nearest_coord = 0
 		for coord in range(1, len(self.coords) - 1):
@@ -32,11 +33,9 @@ class ArbitraryInsertion:
 					curr_arc = self.calculate_distance(self.coords[self.subtour[b]], self.coords[next_coord]) + self.calculate_distance(self.coords[next_coord], self.coords[self.subtour[b + 1]]) - self.calculate_distance(self.coords[self.subtour[b]], self.coords[self.subtour[b + 1]])
 					if (curr_arc < min_arc):
 						min_arc = curr_arc
-						conn_cord = self.subtour[b]
+						conn_coord = self.subtour[b]
 			self.in_subtour[next_coord] = True
-			print(conn_coord, " ", self.subtour.index(conn_coord))
 			self.subtour.insert(self.subtour.index(conn_coord), next_coord)
-			print(self.subtour)
 
 	def arbitrary_selection(self):
 		coord = 0
@@ -59,8 +58,12 @@ class ArbitraryInsertion:
 		print('*******************************')
 		distance = 0
 		print(self.coords)
-		#for i in range(len(self.coords) - 2):
-			#distance += self.calculate_distance(self.coords[self.subtour[i]], self.coords[self.subtour[i + 1]])
+
+		#calculates total distance and prints
+		for i in range(len(self.coords) - 2):
+			distance += self.calculate_distance(self.coords[self.subtour[i]], self.coords[self.subtour[i + 1]])
+		print(distance)
+		
 		plt.plot(x, y)
 		plt.show()
 		
