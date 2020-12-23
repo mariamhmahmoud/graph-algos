@@ -1,6 +1,7 @@
 import math
 import matplotlib.pyplot as plt
 
+#only run if there are at least 3 coordinates
 class ArbitraryInsertion:
 	def __init__(self, coords):
 		self.coords = coords
@@ -24,18 +25,21 @@ class ArbitraryInsertion:
 		self.in_subtour[nearest_coord] = True
 
 		next_coord = 0
-		for a in range(len(self.coords) - 3):
+		for a in range(len(self.coords) - 2):
 			next_coord = self.arbitrary_selection()
 			min_arc = float('inf')
 			conn_coord = 0
-			for b in range(len(self.subtour) - 2):
+			for b in range(len(self.subtour) - 1):
 				if self.in_subtour[b] == True:
 					curr_arc = self.calculate_distance(self.coords[self.subtour[b]], self.coords[next_coord]) + self.calculate_distance(self.coords[next_coord], self.coords[self.subtour[b + 1]]) - self.calculate_distance(self.coords[self.subtour[b]], self.coords[self.subtour[b + 1]])
 					if (curr_arc < min_arc):
 						min_arc = curr_arc
 						conn_coord = self.subtour[b]
 			self.in_subtour[next_coord] = True
-			self.subtour.insert(self.subtour.index(conn_coord), next_coord)
+			self.subtour.insert(self.subtour.index(conn_coord) + 1, next_coord)
+
+		#add point to connect back to
+		self.subtour.append(0)
 
 	def arbitrary_selection(self):
 		coord = 0
@@ -46,12 +50,17 @@ class ArbitraryInsertion:
 	def calculate_distance(self, coord_a, coord_b):
 		return math.sqrt((coord_a[0] - coord_b[0]) ** 2 + (coord_a[1] - coord_b[1]) ** 2)
 
-	def print_plot(self):
+	def print_plot(self):	
+		print(self.subtour)	
 		x = []
 		y = []
 		for i in self.subtour:
+			print(i)
+		for i in self.subtour:
 			x.append(self.coords[i][0])
 			y.append(self.coords[i][1])
+		print(x)
+		print(y)
 		print()
 		print('*******************************')
 		print('Arbitrary Insertion information:')
@@ -62,8 +71,9 @@ class ArbitraryInsertion:
 		#calculates total distance and prints
 		for i in range(len(self.coords) - 2):
 			distance += self.calculate_distance(self.coords[self.subtour[i]], self.coords[self.subtour[i + 1]])
+		distance += self.calculate_distance(self.coords[self.subtour[0]], self.coords[self.subtour[len(self.coords) - 2]])
 		print(distance)
-		
+
 		plt.plot(x, y)
 		plt.show()
 		
