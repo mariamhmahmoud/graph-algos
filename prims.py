@@ -4,9 +4,9 @@ import matplotlib.pyplot as plt
 class Prim:
 	def __init__(self, coords):
 		self.coords = coords
-		self.k = [False] * len(coords)
-		self.d = [float('inf')] * len(coords)
-		self.v = list(range(0, len(coords) - 1))
+		self.k = [False] * (len(coords))
+		self.d = [float('inf')] * (len(coords))
+		self.v = list(range(0, len(coords)))
 
 	def algo(self):
 		self.d[0] = 0.0
@@ -14,7 +14,7 @@ class Prim:
 		for a in range(len(self.coords)):
 			distance = float('inf')
 			min_distance = float('inf')
-			for b in range(len(self.coords) - 1):
+			for b in range(len(self.coords)):
 				if self.k[b] is False:
 					distance = self.d[b]
 					if distance < min_distance:
@@ -23,7 +23,7 @@ class Prim:
 
 			self.k[vertex] = True
 
-			for c in range(len(self.coords) - 1):
+			for c in range(len(self.coords)):
 				if self.k[c] is False:
 					distance = self.calculate_distance(self.coords[vertex], self.coords[c])
 					if distance < self.d[c]:
@@ -37,7 +37,7 @@ class Prim:
 		x = []
 		y = []
 		d = 0
-		for coord in range(len(self.coords) - 1):
+		for coord in range(len(self.coords)):
 			x.append(self.coords[coord][0])
 			x.append(self.coords[self.v[coord]][0])
 			y.append(self.coords[coord][1])
@@ -52,8 +52,9 @@ class Prim:
 		print('Distance: ', d)
 		print('Total points connected: ', len(self.coords))
 		print('Points connected: ')
-		for coord in range(1, len(self.coords) - 1):
-			print(coord, '-->', self.v[coord])
+		for coord in range(1, len(self.coords)):
+			print(coord, '--> ', self.v[coord])
+		print()
 		print('*******************************')
 		plt.show()
 		
