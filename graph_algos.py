@@ -1,14 +1,16 @@
 import argparse
 from prims import Prim
+from arbitrary_insertion import ArbitraryInsertion
 import matplotlib.pyplot as plt
 
 #parse command line
 parser = argparse.ArgumentParser(description='Specify which graph algorithm to run.')
 parser.add_argument('filename')
-parser.add_argument('-p', '--prims' , help="Run Prim's algorithm.")
-parser.add_argument('-k', '--kruskalls', help="Run Kruskall's algorithm.")
-parser.add_argument('-a', '--arbitrary', help="Run Arbitary Insertion TSP algorithm.")
-parser.add_argument('-t', '--tsp', help="Run optimal tsp algorithm.")
+parser.add_argument('-p', '--prims' , help="Run Prim's algorithm.", action='store_true')
+parser.add_argument('-k', '--kruskals', help="Run Kruskal's algorithm.", action='store_true')
+parser.add_argument('-a', '--arbitrary', help="Run Arbitary Insertion TSP algorithm.", action='store_true')
+parser.add_argument('-t', '--tsp', help="Run optimal tsp algorithm.", action='store_true')
+parser.add_argument('-d', '--djikstas', help="Run Djikstra's algorithm.", action='store_true')
 args = parser.parse_args()
 
 #stores all coordinates in file
@@ -26,9 +28,13 @@ if args.prims:
 	p = Prim(points)
 	p.algo()
 	p.print_plot()
-elif args.kruskalls:
+elif args.kruskals:
 	pass
 elif args.arbitrary:
+	a = ArbitraryInsertion(points)
+	a.algo()
+	a.print_plot()
+elif args.tsp:
 	pass
 else:
 	pass
