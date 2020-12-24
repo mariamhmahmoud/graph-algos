@@ -13,7 +13,7 @@ class ArbitraryInsertion:
 		print(self.subtour)
 		min_distance = float('inf')
 		nearest_coord = 0
-		for coord in range(1, len(self.coords) - 1):
+		for coord in range(1, len(self.coords)):
 			curr_distance = self.calculate_distance(self.coords[0], self.coords[coord])
 			if (curr_distance < min_distance):
 				min_distance = curr_distance
@@ -50,7 +50,6 @@ class ArbitraryInsertion:
 		return math.sqrt((coord_a[0] - coord_b[0]) ** 2 + (coord_a[1] - coord_b[1]) ** 2)
 
 	def print_plot(self):	
-		print(self.subtour)	
 		x = []
 		y = []
 		for i in self.subtour:
@@ -59,9 +58,8 @@ class ArbitraryInsertion:
 
 		#calculates total distance and prints
 		distance = 0
-		for i in range(len(self.coords) - 2):
+		for i in range(len(self.coords)):
 			distance += self.calculate_distance(self.coords[self.subtour[i]], self.coords[self.subtour[i + 1]])
-		distance += self.calculate_distance(self.coords[self.subtour[0]], self.coords[self.subtour[len(self.coords) - 2]])
 
 		print()
 		print('*******************************')
@@ -69,9 +67,8 @@ class ArbitraryInsertion:
 		print('Distance: ', distance)
 		print('Total points connected: ', len(self.coords))
 		print('Points connected: ')
-		for i in range(len(self.subtour) - 1):
+		for i in range(len(self.subtour)):
 			print(self.subtour[i], '--> ', end =" ")
-		print(self.subtour[0])
 		print('*******************************')
 
 		plt.plot(x, y)
