@@ -1,7 +1,6 @@
 import math
 import matplotlib.pyplot as plt
 
-#only run if there are at least 3 coordinates
 class ArbitraryInsertion:
 	def __init__(self, coords):
 		self.coords = coords
